@@ -1,181 +1,149 @@
-# 21st.dev Magic AI Agent
+# UI 组件生成 MCP 服务
 
-![MCP Banner](https://21st.dev/magic-agent-og-image.png)
+这是一个基于 MCP (Model Context Protocol) 的服务，用于自动生成 UI 组件。该服务可以与 Claude 和 Windsurf 等 AI 助手集成，提供便捷的 UI 组件生成功能。
 
-Magic Component Platform (MCP) is a powerful AI-driven tool that helps developers create beautiful, modern UI components instantly through natural language descriptions. It integrates seamlessly with popular IDEs and provides a streamlined workflow for UI development.
+## 功能特点
 
-## 🌟 Features
+- 支持多种 UI 组件的生成（按钮、输入框、对话框、表格、表单等）
+- 与 Claude 和 Windsurf AI 助手无缝集成
+- 基于 buouui.com API 进行组件生成
+- 支持自定义组件查询和生成
 
-- **AI-Powered UI Generation**: Create UI components by describing them in natural language
-- **Multi-IDE Support**:
-  - [Cursor](https://cursor.com) IDE integration
-  - [Windsurf](https://windsurf.ai) support
-  - [VSCode + Cline](https://cline.bot) integration (Beta)
-- **Modern Component Library**: Access to a vast collection of pre-built, customizable components inspired by [21st.dev](https://21st.dev)
-- **Real-time Preview**: Instantly see your components as you create them
-- **TypeScript Support**: Full TypeScript support for type-safe development
-- **SVGL Integration**: Access to a vast collection of professional brand assets and logos
-- **Component Enhancement**: Improve existing components with advanced features and animations (Coming Soon)
+## 安装
 
-## 🎯 How It Works
-
-1. **Tell Agent What You Need**
-
-   - In your AI Agent's chat, just type `/ui` and describe the component you're looking for
-   - Example: `/ui create a modern navigation bar with responsive design`
-
-2. **Let Magic Create It**
-
-   - Your IDE prompts you to use Magic
-   - Magic instantly builds a polished UI component
-   - Components are inspired by 21st.dev's library
-
-3. **Seamless Integration**
-   - Components are automatically added to your project
-   - Start using your new UI components right away
-   - All components are fully customizable
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js (Latest LTS version recommended)
-- One of the supported IDEs:
-  - Cursor
-  - Windsurf
-  - VSCode (with Cline extension)
-
-### Installation
-
-1. **Generate API Key**
-
-   - Visit your Magic dashboard
-   - Navigate to the API section
-   - Generate a new API key
-
-2. **IDE Setup**
-
-#### Cursor IDE
-
+1. 克隆仓库：
 ```bash
-npx -y @smithery/cli@latest run @21st-dev/magic-mcp --config "{\"TWENTY_FIRST_API_KEY\":\"your-api-key\"}"
+git clone [your-repository-url]
+cd mcp-ui-gen
 ```
 
-#### Windsurf
+2. 安装依赖：
+```bash
+pnpm install
+```
 
-Add to `~/.codeium/windsurf/mcp_config.json`:
+3. 构建项目：
+```bash
+pnpm build
+```
 
-```json
-{
-  "mcpServers": {
-    "magic": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@smithery/cli@latest",
-        "install",
-        "@21st-dev/magic-mcp",
-        "--client",
-        "windsurf"
-      ],
-      "env": {
-        "TWENTY_FIRST_API_KEY": "your-api-key"
-      }
-    }
+## 使用方法
+
+1. 启动服务：
+```bash
+pnpm start
+```
+
+2. 在 Claude 或 Windsurf 中使用以下命令触发 UI 组件生成：
+- `/ui [组件描述]`
+- `/21 [组件描述]`
+- `/21st [组件描述]`
+
+例如：
+```
+/ui 创建一个带有确认和取消按钮的对话框
+```
+
+## 项目结构
+
+```
+src/
+├── tools/
+│   ├── create-ui.ts    # UI 组件生成工具
+│   ├── logo-search.ts  # Logo 搜索工具
+│   └── fetch-ui.ts     # UI 组件获取工具
+├── utils/
+│   ├── base-tool.ts    # 基础工具类
+│   └── http-client.ts  # HTTP 客户端配置
+└── index.ts           # 主入口文件
+```
+
+## API 说明
+
+### 组件生成 API
+
+- 端点：`https://buouui.com/api/mcp`
+- 方法：`POST`
+- 请求体：
+  ```typescript
+  {
+    message: string;    // 用户完整消息
+    searchQuery: string // 组件搜索查询（2-4个关键词）
+  }
+  ```
+- 响应：
+  ```typescript
+  {
+    text: string  // 生成的组件代码
+  }
+  ```
+
+## 开发指南
+
+### 添加新工具
+
+1. 在 `src/tools` 目录下创建新的工具类
+2. 继承 `BaseTool` 类
+3. 实现必要的抽象方法和属性
+4. 在 `src/index.ts` 中注册新工具
+
+示例：
+```typescript
+export class NewTool extends BaseTool {
+  name = "tool-name";
+  description = "Tool description";
+  
+  schema = z.object({
+    // 定义参数架构
+  });
+
+  async execute(args: z.infer<typeof this.schema>) {
+    // 实现工具逻辑
   }
 }
 ```
 
-#### VSCode + Cline (Beta)
+### 错误处理
 
-Add to Cline's MCP configuration:
+服务使用标准的错误处理机制：
 
-```json
-{
-  "mcpServers": {
-    "magic": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@smithery/cli@latest",
-        "install",
-        "@21st-dev/magic-mcp",
-        "--client",
-        "cline"
-      ],
-      "env": {
-        "TWENTY_FIRST_API_KEY": "your-api-key"
-      }
-    }
-  }
+```typescript
+try {
+  // 业务逻辑
+} catch (error) {
+  return {
+    content: [{
+      type: "text" as const,
+      text: "Error: [错误描述]"
+    }]
+  };
 }
 ```
 
-## ❓ FAQ
+## 故障排除
 
-### How does Magic AI Agent handle my codebase?
+1. 组件生成失败
+   - 检查网络连接
+   - 确认 API 端点可访问
+   - 查看服务器日志
 
-Magic AI Agent only writes or modifies files related to the components it generates. It follows your project's code style and structure, and integrates seamlessly with your existing codebase without affecting other parts of your application.
+2. 集成问题
+   - 确保 Claude/Windsurf 正确配置了 MCP 工具
+   - 验证工具响应格式是否符合要求
 
-### Can I customize the generated components?
+## 贡献指南
 
-Yes! All generated components are fully editable and come with well-structured code. You can modify the styling, functionality, and behavior just like any other React component in your codebase.
+1. Fork 项目
+2. 创建特性分支
+3. 提交更改
+4. 推送到分支
+5. 创建 Pull Request
 
-### What happens if I run out of generations?
+## 许可证
 
-If you exceed your monthly generation limit, you'll be prompted to upgrade your plan. You can upgrade at any time to continue generating components. Your existing components will remain fully functional.
+ISC License
 
-### How soon do new components get added to 21st.dev's library?
+## 联系方式
 
-Authors can publish components to 21st.dev at any time, and Magic Agent will have immediate access to them. This means you'll always have access to the latest components and design patterns from the community.
-
-### Is there a limit to component complexity?
-
-Magic AI Agent can handle components of varying complexity, from simple buttons to complex interactive forms. However, for best results, we recommend breaking down very complex UIs into smaller, manageable components.
-
-## 🛠️ Development
-
-### Project Structure
-
-```
-mcp/
-├── app/
-│   └── components/     # Core UI components
-├── types/             # TypeScript type definitions
-├── lib/              # Utility functions
-└── public/           # Static assets
-```
-
-### Key Components
-
-- `IdeInstructions`: Setup instructions for different IDEs
-- `ApiKeySection`: API key management interface
-- `WelcomeOnboarding`: Onboarding flow for new users
-
-## 🤝 Contributing
-
-We welcome contributions! Please join our [Discord community](https://discord.gg/Qx4rFunHfm) and provide feedback to help improve Magic Agent. The source code is available on [GitHub](https://github.com/serafimcloud/21st).
-
-## 👥 Community & Support
-
-- [Discord Community](https://discord.gg/Qx4rFunHfm) - Join our active community
-- [Twitter](https://x.com/serafimcloud) - Follow us for updates
-
-## ⚠️ Beta Notice
-
-Magic Agent is currently in beta. All features are free during this period. We appreciate your feedback and patience as we continue to improve the platform.
-
-## 📝 License
-
-MIT License
-
-## 🙏 Acknowledgments
-
-- Thanks to our beta testers and community members
-- Special thanks to the Cursor, Windsurf, and Cline teams for their collaboration
-- Integration with [21st.dev](https://21st.dev) for component inspiration
-- [SVGL](https://svgl.app) for logo and brand asset integration
-
----
-
-For more information, join our [Discord community](https://discord.gg/Qx4rFunHfm) or visit [21st.dev/magic](https://21st.dev/magic).
+- 邮箱：support@buouui.com
+- 网站：https://buouui.com

@@ -31,11 +31,11 @@ export class CreateUiTool extends BaseTool {
       console.log("Sending request to API with:", { message, searchQuery });
 
       const { data } = await twentyFirstClient.post<CreateUiResponse>(
-        "/api/mcp"
-        // {
-        //   message,
-        //   searchQuery,
-        // }
+        "/api/mcp",
+        {
+          message,
+          searchQuery,
+        }
       );
 
       console.log("Received API response:", data);
