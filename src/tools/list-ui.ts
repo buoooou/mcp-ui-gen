@@ -2,18 +2,18 @@ import { z } from "zod";
 import { BaseTool } from "../utils/base-tool";
 import { twentyFirstClient } from "../utils/http-client";
 
-const FETCH_UI_TOOL_NAME = "fetch-ui";
+const FETCH_UI_TOOL_NAME = "list-ui";
 const FETCH_UI_TOOL_DESCRIPTION = `
-"Use this tool when the user wants to see component, get inspiration, or /ui fetch data and previews from buouui.com. 
-This tool will returns a list of tsx component code. you need to choose the most suitable one of them and integrate it into the codebase.
-After calling this tool, you must edit or add files to integrate the snippet into the codebase."
+"Use this tool when the user wants to see buouui.com component, or /buou fetch data and previews from buouui.com. 
+This tool returns the JSON data of matching components without generating new code. This tool ONLY returns the text snippet for that UI component. 
+After calling this tool, you need to display the data in the UI, and finally you need to show the website page of the buouui.com."
 `;
 
 interface FetchUiResponse {
   text: string;
 }
 
-export class FetchUiTool extends BaseTool {
+export class ListUiTool extends BaseTool {
   name = FETCH_UI_TOOL_NAME;
   description = FETCH_UI_TOOL_DESCRIPTION;
 
@@ -29,7 +29,7 @@ export class FetchUiTool extends BaseTool {
   async execute({ message, searchQuery }: z.infer<typeof this.schema>) {
     try {
       const { data } = await twentyFirstClient.post<FetchUiResponse>(
-        "/api/fetch",
+        "/api/list",
         {
           message,
           searchQuery,
