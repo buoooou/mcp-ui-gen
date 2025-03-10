@@ -1,5 +1,7 @@
 # UI 组件生成 MCP 服务
 
+[![smithery badge](https://smithery.ai/badge/@buoooou/supaui-mcp)](https://smithery.ai/server/@buoooou/supaui-mcp)
+
 这是一个基于 MCP (Model Context Protocol) 的服务，用于自动生成 UI 组件。该服务可以与 Claude 和 Windsurf 等 AI 助手集成，提供便捷的 UI 组件生成功能。
 
 ## 功能特点
@@ -10,6 +12,16 @@
 - 支持自定义组件查询和生成
 
 ## 安装
+
+### 安装管理工具 Smithery
+
+通过 [Smithery](https://smithery.ai/server/@buoooou/supaui-mcp) 自动将 supaui-mcp 安装到 Claude：
+
+```bash
+npx -y @smithery/cli install @buoooou/supaui-mcp --client claude
+```
+
+### 手动安装
 
 1. 克隆仓库：
 ```bash
