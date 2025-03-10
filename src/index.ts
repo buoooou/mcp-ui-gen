@@ -5,7 +5,7 @@ import { CreateUiTool } from "./tools/create-ui";
 import { FetchUiTool } from "./tools/fetch-ui";
 import { ListUiTool } from "./tools/list-ui";
 const server = new McpServer({
-  name: "supa-buou",
+  name: "supaui-mcp",
   version: "0.0.1",
 });
 
@@ -16,3 +16,5 @@ new ListUiTool().register(server);
 const transport = new StdioServerTransport();
 
 server.connect(transport);
+
+console.log("SupaUI MCP Server running");

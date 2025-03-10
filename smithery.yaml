@@ -6,12 +6,12 @@ startCommand:
     # JSON Schema defining the configuration options for the MCP.
     type: object
     required: 
-      - TWENTY_FIRST_API_KEY
+      - BUOU_API_KEY
     properties:
-      TWENTY_FIRST_API_KEY:
+      BUOU_API_KEY:
         type: string
-        description: "The API key from https://21st.dev/magic/console"
+        description: "The API key from https://buouui.com/dashboard/key"
   commandFunction:
     # A function that produces the CLI command to start the MCP on stdio.
     |-
-    (config) => ({ command: 'node', args: ['dist/index.js'], env: { TWENTY_FIRST_API_KEY: config.TWENTY_FIRST_API_KEY } })
+    (config) => ({ command: 'node', args: ['dist/index.js'], env: { BUOU_API_KEY: config.BUOU_API_KEY } })

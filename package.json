@@ -1,14 +1,15 @@
 {
-  "name": "buouui/supa-mcp",
-  "version": "1.0.0",
+  "name": "@buouui/supaui-mcp",
+  "version": "0.0.2",
+  "description": "A Model Context Protocol server for SupaUI MCP ",
   "main": "dist/index.js",
+  "bin": "dist/index.js",
   "scripts": {
     "start": "node dist/index.js",
     "build": "tsc"
   },
   "author": "support@buouui.com",
   "license": "ISC",
-  "description": "Supa MCP",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.5.0",
     "@types/axios": "^0.9.36",
