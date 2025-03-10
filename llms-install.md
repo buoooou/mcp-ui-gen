@@ -1,68 +1,68 @@
-# Magic MCP Server Installation Guide
+# SupaUI MCP Server Installation Guide for LLMs
 
-This guide is specifically designed for AI agents like Cline to install and configure the Magic MCP server.
+This guide provides detailed instructions for AI agents to install and configure the SupaUI MCP server.
 
 ## Prerequisites
 
 1. Node.js (Latest LTS version)
-2. A valid TWENTY_FIRST_API_KEY from [21st.dev/magic](https://21st.dev/magic)
+2. A valid BUOU_API_KEY from [buouui.com](https://buouui.com/dashboard/key)
 
 ## Installation Steps
 
 ### 1. Configuration Setup
 
-The Magic MCP server requires configuration based on the client type. Below are the setup instructions for each supported client:
+The SupaUI MCP server requires configuration based on the client type. Below are the setup instructions for each supported client:
 
-#### For Windsurf
+#### For Cursor
 
-1. Create or modify the configuration file at `~/.codeium/windsurf/mcp_config.json`:
+1. Create or modify the configuration file at `~/.cursor/mcp_config.json`:
 
 ```json
 {
   "mcpServers": {
-    "magic": {
+    "supaui": {
       "command": "npx",
       "args": [
         "-y",
         "@smithery/cli@latest",
         "install",
-        "@21st-dev/magic-mcp",
+        "@buouui/supaui-mcp",
         "--client",
-        "windsurf"
+        "cursor"
       ],
       "env": {
-        "TWENTY_FIRST_API_KEY": "<API_KEY>"
+        "BUOU_API_KEY": "<API_KEY>"
       }
     }
   }
 }
 ```
 
-2. Replace `<API_KEY>` with the actual TWENTY_FIRST_API_KEY value.
+2. Replace `<API_KEY>` with your actual BUOU_API_KEY.
 
-#### For Cline
+#### For Other LLM Clients
 
 1. Create or modify the MCP configuration file:
 
 ```json
 {
   "mcpServers": {
-    "@21st-dev-magic-mcp": {
+    "@buouui/supaui-mcp": {
       "command": "npx",
       "args": [
         "-y",
         "@smithery/cli@latest",
         "run",
-        "@21st-dev/magic-mcp",
+        "@buouui/supaui-mcp",
         "--config",
-        "\"{\\\"TWENTY_FIRST_API_KEY\\\":\\\"<API_KEY>\\\"}\""
+        "\"{\\\"BUOU_API_KEY\\\":\\\"<API_KEY>\\\"}\""
       ]
     }
   }
 }
 ```
 
-2. Replace `<API_KEY>` with the actual TWENTY_FIRST_API_KEY value.
+2. Replace `<API_KEY>` with your actual BUOU_API_KEY.
 
 ### 2. Verification
 
@@ -78,37 +78,36 @@ To verify the installation:
 
 Common issues and solutions:
 
-1. If the server fails to start:
-
-   - Verify the API key is valid
+1. Server Start Issues:
+   - Verify API key validity
    - Check Node.js version (should be LTS)
    - Ensure all dependencies are installed
 
-2. If components fail to generate:
-   - Verify network connectivity
-   - Check API key permissions
-   - Ensure the command format is correct
+2. Component Generation Issues:
+   - Check network connectivity
+   - Verify API key permissions
+   - Ensure correct command format
 
 ## Environment Variables
 
 Required environment variables:
 
-- `TWENTY_FIRST_API_KEY`: Your Magic API key from 21st.dev
+- `BUOU_API_KEY`: Your SupaUI API key from buouui.com
 
 ## Additional Notes
 
-- The server automatically handles TypeScript and React components
-- No additional configuration is needed for basic usage
-- The server supports hot reloading for development
+- The server supports TypeScript and React components out of the box
+- No additional configuration needed for basic usage
+- Supports hot reloading for development
 
 ## Support
 
 If you encounter any issues:
 
-1. Check the [FAQ section](https://21st.dev/magic/docs/faq)
-2. Join our [Discord community](https://discord.gg/Qx4rFunHfm)
-3. Submit an issue on [GitHub](https://github.com/serafimcloud/21st)
+1. Visit [buouui.com/docs](https://buouui.com/docs)
+2. Join our community on [Discord](https://discord.gg/nNbB7CpSue)
+3. Email support at support@buouui.com
 
 ---
 
-This installation guide is maintained by the Magic team. For updates and more information, visit [21st.dev/magic](https://21st.dev/magic).
+This installation guide is maintained by the SupaUI team. For updates and more information, visit [buouui.com](https://buouui.com).

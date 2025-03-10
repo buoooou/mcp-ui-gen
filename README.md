@@ -1,149 +1,107 @@
-# UI 组件生成 MCP 服务
+# SupaUI MCP Server
 
-这是一个基于 MCP (Model Context Protocol) 的服务，用于自动生成 UI 组件。该服务可以与 Claude 和 Windsurf 等 AI 助手集成，提供便捷的 UI 组件生成功能。
+A Model Context Protocol (MCP) server for SupaUI that enables AI agents to generate, fetch, and manage UI components through natural language interactions.
 
-## 功能特点
+## Features
 
-- 支持多种 UI 组件的生成（按钮、输入框、对话框、表格、表单等）
-- 与 Claude 和 Windsurf AI 助手无缝集成
-- 基于 buouui.com API 进行组件生成
-- 支持自定义组件查询和生成
+- **Create UI Components**: Generate React components based on natural language descriptions
+- **Fetch UI Components**: Search and retrieve components from buouui.com
+- **List UI Components**: Browse available components with detailed previews
+- **TypeScript Support**: Built with TypeScript for better type safety and developer experience
 
-## 安装
+## Prerequisites
 
-1. 克隆仓库：
+- Node.js (Latest LTS version)
+- BUOU_API_KEY from [buouui.com](https://buouui.com/dashboard/key)
+
+## Installation
+
 ```bash
-git clone [your-repository-url]
-cd mcp-ui-gen
-```
-
-2. 安装依赖：
-```bash
+# Install dependencies
 pnpm install
-```
 
-3. 构建项目：
-```bash
+# Build the project
 pnpm build
 ```
 
-## 使用方法
+## Configuration
 
-1. 启动服务：
+1. Set your BUOU_API_KEY in the environment:
+```bash
+export BUOU_API_KEY=your_api_key_here
+```
+
+2. Or create a configuration file based on smithery.yaml requirements.
+
+## Usage
+
+### Starting the Server
+
 ```bash
 pnpm start
 ```
 
-2. 在 Claude 或 Windsurf 中使用以下命令触发 UI 组件生成：
-- `/ui [组件描述]`
-- `/21 [组件描述]`
-- `/21st [组件描述]`
+### Available Commands
 
-例如：
-```
-/ui 创建一个带有确认和取消按钮的对话框
-```
+The server supports the following commands:
 
-## 项目结构
-
+1. Create UI Component:
 ```
-src/
-├── tools/
-│   ├── create-ui.ts    # UI 组件生成工具
-│   ├── logo-search.ts  # Logo 搜索工具
-│   └── fetch-ui.ts     # UI 组件获取工具
-├── utils/
-│   ├── base-tool.ts    # 基础工具类
-│   └── http-client.ts  # HTTP 客户端配置
-└── index.ts           # 主入口文件
+/ui create a basic button
 ```
 
-## API 说明
-
-### 组件生成 API
-
-- 端点：`https://buouui.com/api/mcp`
-- 方法：`POST`
-- 请求体：
-  ```typescript
-  {
-    message: string;    // 用户完整消息
-    searchQuery: string // 组件搜索查询（2-4个关键词）
-  }
-  ```
-- 响应：
-  ```typescript
-  {
-    text: string  // 生成的组件代码
-  }
-  ```
-
-## 开发指南
-
-### 添加新工具
-
-1. 在 `src/tools` 目录下创建新的工具类
-2. 继承 `BaseTool` 类
-3. 实现必要的抽象方法和属性
-4. 在 `src/index.ts` 中注册新工具
-
-示例：
-```typescript
-export class NewTool extends BaseTool {
-  name = "tool-name";
-  description = "Tool description";
-  
-  schema = z.object({
-    // 定义参数架构
-  });
-
-  async execute(args: z.infer<typeof this.schema>) {
-    // 实现工具逻辑
-  }
-}
+2. Fetch UI Component:
+```
+/ui fetch modern login form
 ```
 
-### 错误处理
-
-服务使用标准的错误处理机制：
-
-```typescript
-try {
-  // 业务逻辑
-} catch (error) {
-  return {
-    content: [{
-      type: "text" as const,
-      text: "Error: [错误描述]"
-    }]
-  };
-}
+3. List UI Components:
+```
+/buou list cards
 ```
 
-## 故障排除
+## API Tools
 
-1. 组件生成失败
-   - 检查网络连接
-   - 确认 API 端点可访问
-   - 查看服务器日志
+### CreateUiTool
+- Generates new UI components based on natural language descriptions
+- Endpoint: `/api/create`
 
-2. 集成问题
-   - 确保 Claude/Windsurf 正确配置了 MCP 工具
-   - 验证工具响应格式是否符合要求
+### FetchUiTool
+- Retrieves existing components from buouui.com
+- Endpoint: `/api/fetch`
 
-## 贡献指南
+### ListUiTool
+- Lists available components with previews
+- Endpoint: `/api/list`
 
-1. Fork 项目
-2. 创建特性分支
-3. 提交更改
-4. 推送到分支
-5. 创建 Pull Request
+## Development
 
-## 许可证
+```bash
+# Build in watch mode
+tsc -w
 
-ISC License
+# Run tests
+pnpm test
+```
 
-## 联系方式
+## Environment Variables
 
-- 邮箱：support@buouui.com
-- 网站：https://buouui.com
+- `BUOU_API_KEY`: Your API key from buouui.com (Required)
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+## License
+
+ISC
+
+## Support
+
+For support, please visit:
+- [buouui.com](https://buouui.com)
+- Email: support@buouui.com
