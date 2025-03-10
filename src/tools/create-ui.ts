@@ -5,7 +5,7 @@ import { twentyFirstClient } from "../utils/http-client";
 const UI_TOOL_NAME = "create-ui";
 const UI_TOOL_DESCRIPTION = `
 "Use this tool when the user requests a new UI component—e.g., mentions /ui or asks for a button, input, dialog, table, form, banner, card, or other React component.
-This tool will returns a list of tsx component code. you need to choose the most suitable one of them and integrate it into the codebase.
+This tool ONLY returns the text snippet for that UI component. 
 After calling this tool, you need to show the component like v0 and edit or add files to integrate the snippet into the codebase.
 `;
 

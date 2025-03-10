@@ -5,7 +5,7 @@ import { twentyFirstClient } from "../utils/http-client";
 const FETCH_UI_TOOL_NAME = "fetch-ui";
 const FETCH_UI_TOOL_DESCRIPTION = `
 "Use this tool when the user wants to see component, get inspiration, or /ui fetch data and previews from buouui.com. 
-This tool will returns a list of tsx component code. you need to choose the most suitable one of them and integrate it into the codebase.
+This tool ONLY returns the text snippet for that UI component. 
 After calling this tool, you must edit or add files to integrate the snippet into the codebase."
 `;
 
