@@ -4,7 +4,7 @@ import { twentyFirstClient } from "../utils/http-client";
 
 const FETCH_UI_TOOL_NAME = "fetch-ui";
 const FETCH_UI_TOOL_DESCRIPTION = `
-"Use this tool when the user wants to see component, get inspiration, or /ui fetch data and previews from buouui.com. 
+"Use this tool when the user wants to see component, get inspiration, or /buou or /ui fetch data and previews from buouui.com. 
 This tool ONLY returns the text snippet for that UI component. 
 After calling this tool, you must edit or add files to integrate the snippet into the codebase."
 `;
