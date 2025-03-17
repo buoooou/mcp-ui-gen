@@ -21,9 +21,7 @@ export class CreateImageTool extends BaseTool {
     message: z.string().describe("Full users message"),
     searchQuery: z
       .string()
-      .describe(
-        "Generate a search query for buouui.com(library for searching UI components) to find a UI component that matches the user's message. Must be a two-four words max or phrase"
-      ),
+      .describe("Generate a search query for user's message"),
     image: z.string().describe("The customer upload image base64 text"),
   });
 
