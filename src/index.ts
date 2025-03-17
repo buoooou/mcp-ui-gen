@@ -4,6 +4,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { CreateUiTool } from "./tools/create-ui";
 import { FetchUiTool } from "./tools/fetch-ui";
 import { ListUiTool } from "./tools/list-ui";
+import { CreateImageTool } from "./tools/create-image";
 const server = new McpServer({
   name: "supaui-mcp",
   version: "0.0.1",
@@ -13,6 +14,7 @@ const server = new McpServer({
 new CreateUiTool().register(server);
 new FetchUiTool().register(server);
 new ListUiTool().register(server);
+new CreateImageTool().register(server);
 const transport = new StdioServerTransport();
 
 server.connect(transport);
