@@ -19,7 +19,11 @@ export class CreateImageTool extends BaseTool {
 
   schema = z.object({
     message: z.string().describe("Full users message"),
-    image: z.string().describe("The customer upload image base64 text"),
+    image: z
+      .string()
+      .describe(
+        "If customer upload image, please provide the base64 text of the image"
+      ),
   });
 
   async execute({ message, image }: z.infer<typeof this.schema>) {
