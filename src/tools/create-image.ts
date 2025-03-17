@@ -18,7 +18,11 @@ export class CreateImageTool extends BaseTool {
   description = UI_TOOL_DESCRIPTION;
 
   schema = z.object({
-    message: z.string().describe("Full users message"),
+    message: z
+      .string()
+      .describe(
+        "Generate a prompt to generate a direct picture according to the customer's description, without second communication with the customer."
+      ),
     image: z
       .string()
       .describe(
