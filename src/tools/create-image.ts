@@ -21,7 +21,7 @@ export class CreateImageTool extends BaseTool {
     message: z.string().describe("Full users message"),
     searchQuery: z
       .string()
-      .describe("Generate a search query for user's message"),
+      .describe("Generate a create image query for user's message"),
     image: z.string().describe("The customer upload image base64 text"),
   });
 
