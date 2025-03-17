@@ -19,19 +19,15 @@ export class CreateImageTool extends BaseTool {
 
   schema = z.object({
     message: z.string().describe("Full users message"),
-    searchQuery: z
-      .string()
-      .describe("Generate a create image query for user's message"),
     image: z.string().describe("The customer upload image base64 text"),
   });
 
-  async execute({ message, searchQuery, image }: z.infer<typeof this.schema>) {
+  async execute({ message, image }: z.infer<typeof this.schema>) {
     try {
       const { data } = await twentyFirstClient.post<CreateUiResponse>(
         "/api/image",
         {
           message,
-          searchQuery,
           image,
         }
       );
