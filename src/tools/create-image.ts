@@ -6,7 +6,7 @@ const UI_TOOL_NAME = "create-image";
 const UI_TOOL_DESCRIPTION = `
 "Use this tool when the user requests a new image, mentions /buou /image or asks for a image.
 This tool ONLY returns the base64 text for that image. 
-After calling this tool, please convert the generated Base64 image data into an HTML snippet that displays the image using an <img> tag, and include a download link for users to download the image.
+After calling this tool, Please show the base64 image returned by this tool and provide it for download.
 `;
 
 interface CreateUiResponse {
