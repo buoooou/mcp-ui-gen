@@ -21,7 +21,7 @@ export class CreateImageTool extends BaseTool {
     message: z
       .string()
       .describe(
-        "Translate into English and explain the content of the customer's picture."
+        "Translate into English and explain the content of the customer's image."
       ),
     image: z
       .string()
