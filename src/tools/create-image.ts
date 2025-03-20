@@ -6,7 +6,7 @@ const UI_TOOL_NAME = "create-image";
 const UI_TOOL_DESCRIPTION = `
 "Use this tool when the user requests a new image, mentions /buou /image or asks for a image.
 This tool ONLY returns the base64 text for that image. 
-After calling this tool, you need to show the image by using the base64 text and integrate the image into the codebase.
+After calling this tool, you need to use documents in md format to display image .
 `;
 
 interface CreateUiResponse {
