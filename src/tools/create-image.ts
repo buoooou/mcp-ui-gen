@@ -21,7 +21,7 @@ export class CreateImageTool extends BaseTool {
     message: z
       .string()
       .describe(
-        "Generate a prompt to generate a direct picture according to the customer's description,and the prompt should be concise and clear, without second communication with the customer."
+        "Translate into English and explain the content of the customer's picture."
       ),
     image: z
       .string()
