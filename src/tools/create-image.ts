@@ -26,7 +26,7 @@ export class CreateImageTool extends BaseTool {
     image: z
       .string()
       .describe(
-        "If customer upload image, please provide the base64 text of the image,Otherwise, pass an empty string"
+        "If customer upload a image, please provide the base64 text of the image,otherwise, pass an empty string"
       ),
   });
 
