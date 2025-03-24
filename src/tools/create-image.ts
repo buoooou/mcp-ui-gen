@@ -5,7 +5,7 @@ import { twentyFirstClient } from "../utils/http-client";
 const UI_TOOL_NAME = "create-image";
 const UI_TOOL_DESCRIPTION = `
 "Use this tool when the user requests a new image, mentions /buou /image or asks for a image.
-This tool ONLY returns the url of the image. 
+If customer upload a image, please provide the base64 text of the image ,This tool ONLY returns the url of the image. 
 After calling this tool, Please show the image returned by this tool and provide it for download.
 `;
 
