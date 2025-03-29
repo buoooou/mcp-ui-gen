@@ -1,7 +1,6 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 
-import { CreateUiTool } from "./tools/create-ui";
 import { FetchUiTool } from "./tools/fetch-ui";
 import { ListUiTool } from "./tools/list-ui";
 import { CreateImageTool } from "./tools/create-image";
@@ -11,7 +10,6 @@ const server = new McpServer({
 });
 
 // Register tools
-new CreateUiTool().register(server);
 new FetchUiTool().register(server);
 new ListUiTool().register(server);
 new CreateImageTool().register(server);
