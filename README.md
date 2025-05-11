@@ -11,10 +11,27 @@ A Model Context Protocol (MCP) server for SupaUI that enables AI agents to gener
 
 ## Prerequisites
 
+### Smithery
+
+use [Smithery](https://smithery.ai/server/@buoooou/supaui-mcp) to install supaui-mcp in Claude：
+
+```bash
+npx -y @smithery/cli install @buoooou/supaui-mcp --client claude
+```
+
+### munal 
+
+1. clone repo：
+```bash
+git clone [your-repository-url]
+cd mcp-ui-gen
+```
+=======
 - Node.js (Latest LTS version)
 - BUOU_API_KEY from [buouui.com](https://buouui.com/dashboard/key)
 
 ## Installation
+
 
 ```bash
 # Install dependencies
