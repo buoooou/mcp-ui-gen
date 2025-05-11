@@ -2,37 +2,42 @@ import { z } from "zod";
 import { BaseTool } from "../utils/base-tool";
 import { twentyFirstClient } from "../utils/http-client";
 
-const UI_TOOL_NAME = "create-ui";
+const UI_TOOL_NAME = "create-image";
 const UI_TOOL_DESCRIPTION = `
-"Use this tool when the user requests a new UI component, mentions /ui or asks for a button, input, dialog, table, form, banner, card, or other React component.
-This tool ONLY returns the text snippet for that UI component. 
-After calling this tool, you need to show the component like v0 and edit or add files to integrate the snippet into the codebase.
+"Use this tool when the user requests a new image, mentions /buou /image or asks for a image.
+If the customer provides the picture editing operation of the attachment, please send it to the corresponding tool.
+This tool ONLY returns the url of the image. 
+After calling this tool, Please show the image returned by this tool and provide it for download.
 `;
 
 interface CreateUiResponse {
   text: string;
 }
 
-export class CreateUiTool extends BaseTool {
+export class CreateImageTool extends BaseTool {
   name = UI_TOOL_NAME;
   description = UI_TOOL_DESCRIPTION;
 
   schema = z.object({
-    message: z.string().describe("Full users message"),
-    searchQuery: z
+    message: z
       .string()
       .describe(
-        "Generate a search query for buouui.com(library for searching UI components) to find a UI component that matches the user's message. Must be a two-four words max or phrase"
+        "Translate into English and explain the content of the customer's image."
+      ),
+    image: z
+      .string()
+      .describe(
+        "If the customer provides the picture editing operation of the attachment,please send it to the corresponding tool,otherwise, pass an empty string"
       ),
   });
 
-  async execute({ message, searchQuery }: z.infer<typeof this.schema>) {
+  async execute({ message, image }: z.infer<typeof this.schema>) {
     try {
       const { data } = await twentyFirstClient.post<CreateUiResponse>(
-        "/api/create",
+        "/api/image",
         {
           message,
-          searchQuery,
+          image,
         }
       );
 
@@ -55,7 +60,7 @@ export class CreateUiTool extends BaseTool {
             text: `Error: ${
               error instanceof Error
                 ? error.message
-                : "Failed to generate UI component"
+                : "Failed to generate Image"
             }. Please try again.`,
           },
         ],
