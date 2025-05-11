@@ -2,6 +2,10 @@
 
 A Model Context Protocol (MCP) server for SupaUI that enables AI agents to generate, fetch, and manage UI components through natural language interactions.
 
+<a href="https://glama.ai/mcp/servers/@buoooou/mcp-ui-gen">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@buoooou/mcp-ui-gen/badge" alt="SupaUI Server MCP server" />
+</a>
+
 ## Features
 
 - **Create UI Components**: Generate React components based on natural language descriptions
