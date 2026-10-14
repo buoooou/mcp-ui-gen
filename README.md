@@ -9,26 +9,38 @@ A Model Context Protocol (MCP) server for SupaUI that enables AI agents to fetch
 - **Create Images**: Generate or edit an image and get its URL
 - **TypeScript Support**: Built with TypeScript for better type safety and developer experience
 
-## Prerequisites
+## Quick start: remote server (recommended)
 
-### Smithery
+The same tools are served over HTTP at `https://buouui.com/api/mcp`, so there is nothing to install. Add the server to your MCP client and send your API key from [buouui.com](https://buouui.com/dashboard/key) in the `Buou-API-Key` header:
 
-use [Smithery](https://smithery.ai/server/@buoooou/supaui-mcp) to install supaui-mcp in Claude：
-
-```bash
-npx -y @smithery/cli install @buoooou/supaui-mcp --client claude
+```json
+{
+  "mcpServers": {
+    "buou": {
+      "url": "https://buouui.com/api/mcp",
+      "headers": {
+        "Buou-API-Key": "buou-xxxxxxx"
+      }
+    }
+  }
+}
 ```
 
-### munal 
+The exact keys differ per client (Windsurf uses `serverUrl`, Cline needs `"type": "streamableHttp"`, Claude Desktop goes through `npx mcp-remote`). The guide at [buouui.com/dashboard/key](https://buouui.com/dashboard/key) has a ready-to-copy config for each one. The server is also listed on [Smithery](https://smithery.ai/servers/buoooou/supaui-mcp).
 
-1. clone repo：
-```bash
-git clone [your-repository-url]
-cd mcp-ui-gen
-```
+## Local stdio server
+
+This repository is the stdio version of the server, for clients that can only start a local process. It calls the buouui.com API with your key.
+
+### Prerequisites
 
 - Node.js (Latest LTS version)
 - BUOU_API_KEY from [buouui.com](https://buouui.com/dashboard/key)
+
+```bash
+git clone https://github.com/buoooou/mcp-ui-gen.git
+cd mcp-ui-gen
+```
 
 ## Installation
 
