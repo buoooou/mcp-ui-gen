@@ -21,5 +21,6 @@ RUN pnpm run build
 
 # The MCP service runs via stdio, so no ports need to be exposed.
 
-# Set the command to run the MCP server
-CMD ["pnpm", "start"]
+# Set the command to run the MCP server. Run node directly: `pnpm start` prints
+# a banner to stdout, which is reserved for the MCP protocol.
+CMD ["node", "dist/index.js"]

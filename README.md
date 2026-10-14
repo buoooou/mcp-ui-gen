@@ -1,12 +1,12 @@
 # SupaUI MCP Server
 
-A Model Context Protocol (MCP) server for SupaUI that enables AI agents to generate, fetch, and manage UI components through natural language interactions.
+A Model Context Protocol (MCP) server for SupaUI that enables AI agents to fetch and browse UI components from buouui.com and to generate images through natural language interactions.
 
 ## Features
 
-- **Create UI Components**: Generate React components based on natural language descriptions
-- **Fetch UI Components**: Search and retrieve components from buouui.com
-- **List UI Components**: Browse available components with detailed previews
+- **Fetch UI Components**: Search buouui.com and get a component's source code together with the npm packages and other components it needs
+- **List UI Components**: Browse the available components, optionally filtered by keyword
+- **Create Images**: Generate or edit an image and get its URL
 - **TypeScript Support**: Built with TypeScript for better type safety and developer experience
 
 ## Prerequisites
@@ -26,7 +26,7 @@ npx -y @smithery/cli install @buoooou/supaui-mcp --client claude
 git clone [your-repository-url]
 cd mcp-ui-gen
 ```
-=======
+
 - Node.js (Latest LTS version)
 - BUOU_API_KEY from [buouui.com](https://buouui.com/dashboard/key)
 
@@ -62,48 +62,49 @@ pnpm start
 
 The server supports the following commands:
 
-1. Create UI Component:
-```
-/ui create a basic button
-```
-
-2. Fetch UI Component:
+1. Fetch UI Component:
 ```
 /ui fetch modern login form
 ```
 
-3. List UI Components:
+2. List UI Components:
 ```
 /buou list cards
 ```
 
+3. Create Image:
+```
+/image a minimal logo for a coffee shop
+```
+
 ## API Tools
 
-### CreateUiTool
-- Generates new UI components based on natural language descriptions
-- Endpoint: `/api/create`
-
-### FetchUiTool
-- Retrieves existing components from buouui.com
+### FetchUiTool (`fetch-ui`)
+- Input: `searchQuery`
+- Returns the best matching component: its files, the npm packages to install, the `@/components/ui` components it imports, and other close matches
 - Endpoint: `/api/fetch`
 
-### ListUiTool
-- Lists available components with previews
+### ListUiTool (`list-ui`)
+- Input: `searchQuery` (optional)
+- Lists component names, filtered by the keyword when one is given
 - Endpoint: `/api/list`
+
+### CreateImageTool (`create-image`)
+- Input: `message`, `image`
+- Returns the URL of the generated image
+- Endpoint: `/api/image`
 
 ## Development
 
 ```bash
 # Build in watch mode
-tsc -w
-
-# Run tests
-pnpm test
+pnpm exec tsc -w
 ```
 
 ## Environment Variables
 
 - `BUOU_API_KEY`: Your API key from buouui.com (Required)
+- `BUOU_API_URL`: Base URL of the API, defaults to `https://buouui.com`. Point it to `http://localhost:3000` to develop against a local site
 
 ## Contributing
 

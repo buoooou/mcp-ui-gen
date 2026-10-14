@@ -11,15 +11,9 @@ importers:
       '@modelcontextprotocol/sdk':
         specifier: ^1.5.0
         version: 1.6.1
-      '@types/axios':
-        specifier: ^0.9.36
-        version: 0.9.36
       axios:
         specifier: ^1.7.9
         version: 1.8.2
-      typescript:
-        specifier: ^5.7.3
-        version: 5.8.2
       zod:
         specifier: ^3.24.2
         version: 3.24.2
@@ -27,15 +21,15 @@ importers:
       '@types/node':
         specifier: ^22.13.4
         version: 22.13.10
+      typescript:
+        specifier: ^5.7.3
+        version: 5.8.2
 
 packages:
 
   '@modelcontextprotocol/sdk@1.6.1':
     resolution: {integrity: sha512-oxzMzYCkZHMntzuyerehK3fV6A2Kwh5BD6CGEJSVDU2QNEhfLOptf2X7esQgaHZXHZY0oHmMsOtIDLP71UJXgA==}
     engines: {node: '>=18'}
-
-  '@types/axios@0.9.36':
-    resolution: {integrity: sha512-NLOpedx9o+rxo/X5ChbdiX6mS1atE4WHmEEIcR9NLenRVa5HoVjAvjafwU3FPTqnZEstpoqCaW7fagqSoTDNeg==}
 
   '@types/node@22.13.10':
     resolution: {integrity: sha512-I6LPUvlRH+O6VRUqYOcMudhaIdUVWfsjnZavnsraHvpBwaEyMN29ry+0UVJhImYL16xsscu0aske3yA+uPOWfw==}
@@ -437,8 +431,6 @@ snapshots:
       zod-to-json-schema: 3.24.3(zod@3.24.2)
     transitivePeerDependencies:
       - supports-color
-
-  '@types/axios@0.9.36': {}
 
   '@types/node@22.13.10':
     dependencies:
