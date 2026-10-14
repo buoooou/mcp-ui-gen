@@ -5,14 +5,29 @@ import { twentyFirstClient } from "../utils/http-client";
 const LIST_UI_TOOL_NAME = "list-ui";
 const LIST_UI_TOOL_DESCRIPTION = `
 Use this tool when the user wants to see which components buouui.com offers, or mentions /buou list.
-This tool ONLY returns component names, it does not return or generate code. Use fetch-ui with one of the names to get the code.
+This tool ONLY returns component names, with a short description and a docs link when a keyword is given. It does not return or generate code. Use fetch-ui with one of the names to get the code.
 After calling this tool, you need to show the names to the user, and finally point them to the website page of buouui.com for previews.
 `;
+
+interface ComponentDetails {
+  name: string;
+  title?: string;
+  description?: string;
+  url?: string;
+}
 
 interface ListUiResponse {
   components?: string[];
   total?: number;
+  // Only sent for a filtered list.
+  details?: ComponentDetails[];
   error?: string;
+}
+
+function formatDetails({ name, title, description, url }: ComponentDetails) {
+  const summary = [title, description].filter(Boolean).join(": ");
+
+  return `- ${name}${summary ? ` — ${summary}` : ""}${url ? ` (${url})` : ""}`;
 }
 
 function formatResponse(data: ListUiResponse) {
@@ -30,7 +45,11 @@ function formatResponse(data: ListUiResponse) {
       ? `${components.length} of ${total} components match`
       : `${total} components`;
 
-  return `${heading}:\n${components.join(", ")}`;
+  const list = data.details?.length
+    ? data.details.map(formatDetails).join("\n")
+    : components.join(", ");
+
+  return `${heading}:\n${list}`;
 }
 
 export class ListUiTool extends BaseTool {

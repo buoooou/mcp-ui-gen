@@ -5,7 +5,7 @@ import { twentyFirstClient } from "../utils/http-client";
 const FETCH_UI_TOOL_NAME = "fetch-ui";
 const FETCH_UI_TOOL_DESCRIPTION = `
 Use this tool when the user wants to see component, get inspiration, or /buou or /ui fetch a UI component from buouui.com.
-This tool returns the source code of the best matching component, the npm packages and other components it needs, and the names of other close matches.
+This tool returns the source code of the best matching component, a link to its docs and live preview, the npm packages and other components it needs, and the names of other close matches.
 After calling this tool, you must edit or add files to integrate the code into the codebase.
 `;
 
@@ -17,6 +17,9 @@ interface ComponentFile {
 interface FetchUiResponse {
   component?: {
     name: string;
+    title?: string;
+    description?: string;
+    url?: string;
     dependencies?: string[];
     registryDependencies?: string[];
     localImports?: string[];
@@ -55,12 +58,22 @@ function formatResponse(data: FetchUiResponse) {
 
   const {
     name,
+    title,
+    description,
+    url,
     dependencies = [],
     registryDependencies = [],
     localImports = [],
     files,
   } = data.component;
-  const sections = [`# ${name}`];
+  const sections = [`# ${name}${title ? ` (${title})` : ""}`];
+
+  if (description) {
+    sections.push(description);
+  }
+  if (url) {
+    sections.push(`Docs and live preview: ${url}`);
+  }
 
   if (dependencies.length) {
     sections.push(`npm packages to install: ${dependencies.join(", ")}`);
