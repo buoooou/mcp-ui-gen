@@ -11,6 +11,22 @@ A Model Context Protocol (MCP) server for SupaUI that enables AI agents to fetch
 
 ## Prerequisites
 
+### Claude connector (no install, no API key)
+
+The same tools are served remotely at `https://buouui.com/api/mcp`, so in Claude (web, Desktop, mobile) you can skip this package:
+
+1. Open **Settings → Connectors** and click **Add custom connector**
+2. Name it `SupaUI` and enter `https://buouui.com/api/mcp`
+3. Click **Connect**, sign in to buouui.com and allow access
+
+Claude Code connects the same way:
+
+```bash
+claude mcp add --transport http supaui https://buouui.com/api/mcp
+```
+
+The connector offers `fetch-ui` and `list-ui`. Image generation (`create-image`) is only available with an API key, through this package or the `Buou-API-Key` header.
+
 ### Smithery
 
 use [Smithery](https://smithery.ai/server/@buoooou/supaui-mcp) to install supaui-mcp in Claude：
